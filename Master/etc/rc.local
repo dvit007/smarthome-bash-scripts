@@ -1,0 +1,19 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+
+#Update UPS state in Openhab at 2 minutes
+at now + 2 minutes -f /home/master/ups/ups_host_start.sh
+
+
+exit 0
