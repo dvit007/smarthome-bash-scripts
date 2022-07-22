@@ -2,12 +2,13 @@
 Скрипты на bach и других языках, которые я использую для автоматизации в Умном доме 
 
 Здесь собраны скрипты, которые используются на серверах:
-- master
-- ubuntu16srv
+- [Master](https://github.com/dvit007/smarthome-bash-scripts#master-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80)
+- [Ubuntu16srv](https://github.com/dvit007/smarthome-bash-scripts#ubuntu16srv-%D0%B2%D0%B8%D1%80%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B0%D1%88%D0%B8%D0%BD%D0%B0)
+- [Raspberry Pi](https://github.com/dvit007/smarthome-bash-scripts#raspberry-pi-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80)
 
 Роутеры wifi:
- - Tomato (OpenWrt)
- - Mikrotik (Router OS 6)
+ - [Tomato (OpenWrt)](https://github.com/dvit007/smarthome-bash-scripts#%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80-tomato-openwrt)
+ - [Mikrotik (Router OS 6)](https://github.com/dvit007/smarthome-bash-scripts#%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80-tomato-openwrt)
 
 Для каждого сервера, скрипты храняться в соответствующих папках. 
 Они повторяют структуру каталогов на устройстве.
