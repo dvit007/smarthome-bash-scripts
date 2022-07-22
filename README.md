@@ -13,7 +13,7 @@
 Они повторяют структуру каталогов на устройстве.
 
 ## Master сервер
-### Скрипты для упраления вирутальными машинами QEMU
+### Скрипты для упраления виртуальными машинами QEMU
 Расположение скриптов:
 `etc/libvrt/hooks/`
 
@@ -83,3 +83,38 @@
 * Роль `3` - Администратор ему доступны все устройства
 
 Роли настраиваюся в правилах OpenHab                           
+
+## Роутер Mikrotik
+Скрипты для роутера Mikrotik.<br/>
+Версия Router OS 6
+
+### Библиотека для скриптов
+В ней собраны функции, которые облегчают разработку других скриптов.
+
+**library-ros.rsc**<br/>
+За основу взята идеия из репозитария<br/>
+https://github.com/AleksovAnry/Edelweiss-ROS
+
+Добавлены свои функции, связанные с определением подключения устройств к определенным серверам. 
+
+Эту библиотеку надо сохранить на роутере в папке `flash/` чтобы она не удалилась после перезагрузки устройства.
+
+Для автоматической загрузки бибилотеки надо добавить задание в System->Scheduler<br/>
+`/system scheduler add comment="Load library for MikroTik Router OS" name=StartScriptLibrary \
+    on-event="#The file must first be uploaded via File->Upload
+    /import flash/library-ros.rsc"
+    policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    start-time=startup`
+
+**netflixunlock.rsc**<br/>
+Скрипт разблоиркует доступ к Netflix через VPN для любых устройств без установки клиентов VPN.<br/>
+В том числе и для любых Smart TV
+
+Его надо сохранить в роутере, и настроить задание в System->Scheduler<br/>
+`/system scheduler add comment="Smart TV scripts" interval=1m name=NetflixUnlcok on-event="\
+    /system script run NetflixUnlock_LGTV1
+    /system script run NetflixUnlock_LGTV1,5"
+    policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon`
+    
+
+
