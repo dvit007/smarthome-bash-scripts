@@ -13,6 +13,9 @@
 Они повторяют структуру каталогов на устройстве.
 
 ## Master сервер
+На этом сервере работает OH3 и другие сервисы и службы необходимые для его работы.<br/>
+Он запущен на отдельной виртаульной машине, внутри которой работе Docker.
+
 ### Скрипты для упраления виртуальными машинами QEMU
 Расположение скриптов:
 `etc/libvrt/hooks/`
@@ -100,10 +103,10 @@ https://github.com/AleksovAnry/Edelweiss-ROS
 Эту библиотеку надо сохранить на роутере в папке `flash/` чтобы она не удалилась после перезагрузки устройства.
 
 Для автоматической загрузки бибилотеки надо добавить задание в System->Scheduler<br/>
-`/system scheduler add comment="Load library for MikroTik Router OS" name=StartScriptLibrary \
+`/system scheduler add comment="Load library for MikroTik Router OS" name=StartScriptLibrary \<br/>
     on-event="#The file must first be uploaded via File->Upload
     /import flash/library-ros.rsc"
-    policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \<br/>
     start-time=startup`
 
 **netflixunlock.rsc**<br/>
@@ -111,10 +114,21 @@ https://github.com/AleksovAnry/Edelweiss-ROS
 В том числе и для любых Smart TV
 
 Его надо сохранить в роутере, и настроить задание в System->Scheduler<br/>
-`/system scheduler add comment="Smart TV scripts" interval=1m name=NetflixUnlcok on-event="\
+`/system scheduler add comment="Smart TV scripts" interval=1m name=NetflixUnlcok on-event="\<br/>
     /system script run NetflixUnlock_LGTV1
     /system script run NetflixUnlock_LGTV1,5"
     policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon`
     
+## Raspberry Pi сервер
+На этом сервере работает OH2
 
+Скрипты расположены в `etc/openhab2/`
 
+**qemu_guest_manage.sh**<br/>
+Вызывается из правил OH2 для удаленного управления виртуальными машинами Qemu
+
+**restartTelegram.sh**<br/>
+Вызывается из правил OH2 для перезапкуска привязки Telegram. Этот "костыль" потребовался, так как бот периодически не получал команды от пользвателей.
+
+**ups_state.sh**<br/>
+Вызывется из правил OH2 для получения состояния UPS
