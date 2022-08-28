@@ -9,6 +9,7 @@
 :global deNat; #Удалить правило firewall nat для устройства
 
 #Инициализация переменных для работы скрипта
+:global DisconnectCount; #Счетчик накапливает проходы скрипта когда нет соединения, чтобы не удалять прввило Nat сразу после первого отключения
 :local nameServers {"netflix";"amazonaws"};#именна серверов Netflix
 :local macDevice "AC:F1:08:C7:F3:DA"; #Mac адрес Smart TV
 #:local ipAdrress "192.168.1.14";
@@ -24,10 +25,17 @@
      :put "$ipAdrress connect to Netflix";
      #Добавим парвило Nat для устройства
      $adNat srcAdr=$ipAdrress toAdr=$ipClientAdrr Comment=$comm;
+     :set DisconnectCount 0;
   } else {
      :put "$ipAdrress not connect to Netflix";
+     #Увеличим счетчик проходов без подключения, чтобы не удалять прввило Nat сразу после первого отключения
+     :set DisconnectCount ($DisconnectCount+1);
+     #Отключим правило примерно через 5 минут после первого отключения от Netflix. Время=количество звпусков скрипта с интвервалом 1 минута 
+     :if ($DisconnectCount > 5) do={
      #Удалим правило Nat для устройства
      $deNat srcAdr=$ipAdrress Comment=$comm;
+     :set DisconnectCount 0;
+     }
   }
 } else {
   :put "Device with mac $macDevice offline";
