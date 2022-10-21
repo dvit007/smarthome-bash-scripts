@@ -11,6 +11,22 @@
 :global cuDte do={return ([/system clock get date]." ".[/system clock get time]);}
 
 
+#Проверить состояние подключения по ip адресу
+#Параметры:
+#ipAdr - строка| type ip с адресом 
+#Возвращаемое значение:
+#true - устройство подключено
+#false - устройство не подключено
+#Пример вызова:
+#:if ([$stCon checkAdr="192.168.1.1])
+:global stCon do={
+  :local conectionState false;
+  if ([/ip firewall connection find (src-address~[:tostr $checkAdr]) && (protocol~"tcp") && (tcp-state~"established")]) do={
+    :set conectionState true;
+  }
+  return $conectionState;
+}  
+
 
 #Добавить правило в таблицу Nat
 #Параметры:
