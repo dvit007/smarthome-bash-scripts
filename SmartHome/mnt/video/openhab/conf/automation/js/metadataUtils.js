@@ -1,4 +1,4 @@
-
+//@ts-check
 
 const bundleContext = require('@runtime/osgi').bundleContext;
 
