@@ -1,5 +1,9 @@
 #!/bin/sh
 
+#Save script to /jffs 
+#Before need create jffs partition
+#doc jffs:https://wiki.freshtomato.org/doku.php/admin-jffs2
+
 #Start on Tomato every minute
 
 #Get Mac adres active devices

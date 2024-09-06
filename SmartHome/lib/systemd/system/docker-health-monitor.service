@@ -1,0 +1,11 @@
+[Unit]
+Description=Docker health monitor daemon
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /usr/bin/docker-health-monitor.sh
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
